@@ -1,0 +1,22 @@
+body{
+	background-color:black !important;
+}
+.container{
+	background-color:#00005C;
+	color: white;
+	height:100%;
+}
+input[type=radio], input[type=checkbox]{
+	margin:10px !important;
+}
+table{
+	background-color:black !important;
+	box-shadow:5px 5px #2B2B35;
+	border-color:black;
+	color:white !important;
+}
+tr{color:white!important}
+
+input, button, select, textarea{
+	color:black !important;
+}

@@ -1,87 +1,405 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Tom Database</title>
-        <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<title>CarLabels</title>
+		<link rel="stylesheet" href='{{ url_for("static", filename="css/main.css") }}'>
+		<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 	</head>
 
-	<body style="background-color:#001433; color:#fff; margin-bottom:20px;">
+	<body>
 		<div class="container">
-			<div class='row'>
-				<div style="text-align:center" class='col-lg-12'>
-					<h1>Assignment 4</h1>
-                    <h3>Tom von Hegedus</h3>
-					<p style="font-size:20px">The server is running at <code>{{ url_for('first_page', _external=True) }}</code></p>
-				</div>
+		<div class="row">
+			<div class="col-md-4">
+				<h1>Carpicker</h1>
+				<p>In this webapplication, you can choose which energylabel you want for your car. All types of cars with that specific energy label will show up.
+				The cars will be sorted on the fuel usage per 100 km.
+				Do you prefer to choose your car first. No problem, you can also choose your type of car and the associated label will be given.
+				</p>
 			</div>
-			
-			<div class="container">
-			<div class='row'>
-				<div style="text-align:justify" class='col-md-8 col-md-offset-2'>
-					<p style="font-size:20px">This is my own made web- application for Semantic web. In this application you can search trough my own made Pasta Database with using the SPARQL language. 
-					When you click 'execute' it will show you the results of your query. The first row is using the reasoner. This means that it will also show you the new relations
-					made by the reasoner. The second row is without reasoner so there will be no inferences. This means that the first row can give more results than the second row.</p>
-				</div>
-			</div>
-			
-			<div class='row'>
-				<div class='col-lg-6'>
-					<h3>With interferencing</h3>
-	
-					<textarea id='query14' class='sparql' style='width: 100%; background-color:#000; color:green; border:none; padding:10px; height: 15em;' rows='10'>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix owl: <http://www.w3.org/2002/07/owl#>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-select distinct ?objprop ?label 
-where { 
-	?objprop a owl:ObjectProperty . 
-	OPTIONAL { ?objprop rdfs:label ?label } 
-}
-</textarea>
-					<div><a id="link14" class='btn btn-primary'>Execute</a></div>
-				</div>
-				<div class='col-lg-6'>
-					<h3>Output</h3>
-               
-					<div id="linktarget14" style='height: 15em; scroll: both; overflow: auto; background-color:#000; color:green; padding:10px;'>This is where the server response will appear.</div>
-				</div>
-			</div>
-            
-            <!-- without inferencing !-->
-            <div class='row'>
-				<div class='col-lg-6'>
-					<h3>Without interferencing</h3>
-				
-					<textarea id='query15' class='sparql2' style='width: 100%; background-color:#000; color:green; border:none; padding:10px; height: 15em;' rows='10'>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix owl: <http://www.w3.org/2002/07/owl#>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-select distinct ?objprop ?label 
-where { 
-	?objprop a owl:ObjectProperty . 
-	OPTIONAL { ?objprop rdfs:label ?label } 
-}
-</textarea>
-					<div><a id="link15" class='btn btn-primary'>Execute</a></div>
-				</div>
-				<div class='col-lg-6'>
-					<h3>Output</h3>
-                   
-					<div id="linktarget15" style='height: 15em; scroll: both; overflow: auto; background-color:#000; color:green; padding: 10px;'>This is where the server response will appear.</div>
-				</div>
-			</div>
-
 		</div>
+			<div class='row'>
+				<div class='col-md-6'>
+					<h3>Choose your energylabel</h3>
+<form action="">
+<input type="radio" name="label" value="a" id="labela">Label A
+<input type="radio" name="label" value="e" id="labele">Label E<br>
+<input type="radio" name="label" value="b" id="labelb">Label B
+<input type="radio" name="label" value="f" id="labelf">Label F<br>
+<input type="radio" name="label" value="c" id="labelc">Label C
+<input type="radio" name="label" value="g" id="labelg">Label G<br>
+<input type="radio" name="label" value="d" id="labeld">Label D
 
+</form>
+				</div>
+				<div class='col-md-6'>
+					<h3>Choose your type of car</h3>
+<select id="abc" onchange="func()">
+ <option value="80" id="1">Audi 80</option>
+ <option value="a1" id="2">Audi A1</option>
+ <option value="a3" id="3">Audi A3</option>
+ <option value="a4" id="4">Audi A4</option>
+ <option value="a5" id="5">Audi A5</option>
+ <option value="a6" id="6">Audi A6</option>
+ <option value="a7" id="7">Audi A7</option>
+ <option value="a8" id="8">Audi A8</option>
+ <option value="q3" id="9">Audi Q3</option>
+ <option value="q5" id="10">Audi Q5</option>
+ <option value="q7" id="11">Audi Q7</option>
+ <option value="quattro" id="12">Audi Quattro</option>
+ <option value="r10_tdi" id="13">Audi R10 TDI</option>
+ <option value="r8" id="14">Audi R8</option>
+ <option value="rs_4" id="15">Audi RS 4</option>
+ <option value="s3" id="16">Audi S3</option>
+ <option value="s4" id="17">Audi S4</option>
+ <option value="s5" id="18">Audi S5</option>
+ <option value="s6" id="19">Audi S6</option>
+ <option value="tt" id="20">Audi TT</option>
+</select>
+<input type="button" class="ok" value="Execute" id="inp"/>
+				</div>
+		</div>
+		<div class='row'>
+			<div class='col-md-6'>
+			<h4>Output</h4>
+					
+			<table id="output1" class='table' style='width:100%; scroll: both; overflow: auto;'>
+			<tbody>
+			<tr><td><strong>Type<strong></td><td><strong>Fuel usage per 100km</strong></td><td><strong>CO2 emission g/km</strong></td></tr>
+			<tbody>
+			</table>
+		    </div>
+			<div class='col-md-6'>
+			<h4>Output</h4>
+					
+			<table id="output2" class='table' style='width:100%; scroll: both; overflow: auto;'>
+			<tbody>
+			<tr><td><strong>Type<strong></td><td><strong>Fuel usage per 100km</strong></td><td><strong>CO2 emission g/km</strong></td></tr>
+			<tbody>
+			</table>
+		    </div>
+		</div>
+		<div class="row">
+		<div class="col-md-12">
+		<h5>Made by <strong>Tom von Hegedus </strong>and<strong> Tim Huijg</strong></h5>
+		</div>
+		</div>
+		</div>
+<textarea id='querya' class='sparql' style='width: 100%; display:none' rows='10'>
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX dbo: &lt;http://dbpedia.org/ontology/&gt;
+
+select ?type ?fuel_usage ?CO2
+where{
+  ?type ?y &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#Label_A&gt; .
+?type &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+?type &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2
+  }
+ORDER BY(?fuel_usage)
+</textarea>
+
+<textarea id='queryb' class='sparql' style='width: 100%; display:none' rows='10'>
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX dbo: &lt;http://dbpedia.org/ontology/&gt;
+
+select ?type ?fuel_usage ?CO2
+where{
+  ?type ?y &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#Label_B&gt; .
+?type &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+?type &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2
+  }
+ORDER BY(?fuel_usage)
+</textarea>
+
+<textarea id='queryc' class='sparql' style='width: 100%; display:none' rows='10'>
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX dbo: &lt;http://dbpedia.org/ontology/&gt;
+
+select ?type ?fuel_usage ?CO2
+where{
+  ?type ?y &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#Label_C&gt; .
+?type &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+?type &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2
+  }
+ORDER BY(?fuel_usage)
+</textarea>
+
+<textarea id='queryd' class='sparql' style='width: 100%; display:none' rows='10'>
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX dbo: &lt;http://dbpedia.org/ontology/&gt;
+
+select ?type ?fuel_usage ?CO2
+where{
+  ?type ?y &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#Label_D&gt; .
+?type &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+?type &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2
+  }
+ORDER BY(?fuel_usage)
+</textarea>
+
+<textarea id='querye' class='sparql' style='width: 100%; display:none' rows='10'>
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX dbo: &lt;http://dbpedia.org/ontology/&gt;
+
+select ?type ?fuel_usage ?CO2
+where{
+  ?type ?y &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#Label_E&gt; .
+?type &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+?type &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2
+  }
+ORDER BY(?fuel_usage)
+</textarea>
+
+<textarea id='queryf' class='sparql' style='width: 100%; display:none' rows='10'>
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX dbo: &lt;http://dbpedia.org/ontology/&gt;
+
+select ?type ?fuel_usage ?CO2
+where{
+  ?type ?y &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#Label_F&gt; .
+?type &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+?type &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2
+  }
+ORDER BY(?fuel_usage)
+</textarea>
+
+
+<textarea id='queryg' class='sparql' style='width: 100%; display:none' rows='10'>
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX dbo: &lt;http://dbpedia.org/ontology/&gt;
+
+select ?type ?fuel_usage ?CO2
+where{
+  ?type ?y &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#Label_G&gt; .
+?type &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+?type &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2
+  }
+ORDER BY(?fuel_usage)
+</textarea>
+
+<textarea id='query80' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_80&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_80&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_80&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='querya1' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_A1&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_A1&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_A1&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='querya3' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_A3&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_A3&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_A3&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='querya4' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_A4&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_A4&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_A4&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='querya5' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_A5&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_A5&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_A5&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='querya6' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_A6&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_A6&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_A6&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='querya7' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_A7&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_A7&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_A7&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='querya8' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_A8&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_A8&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_A8&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='queryq3' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_Q3&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_Q3&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_Q3&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='queryq5' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_Q5&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_Q5&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_Q5&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='queryq7' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_Q7&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_Q7&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_Q7&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='queryquattro' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_Quattro&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_Quattro&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_Quattro&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='queryr10_tdi' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_R10_TDI&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_R10_TDI&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_R10_TDI&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='queryr8' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_R8&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_R8&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_R8&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='queryrs_4' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_RS_4&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_RS_4&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_RS_4&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='querys3' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_S3&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_S3&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_S3&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='querys4' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_S4&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_S4&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_S4&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='querys5' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_S5&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_S5&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_S5&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='querys6' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_S6&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_S6&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_S6&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+<textarea id='querytt' class='sparql' style='width: 100%; display:none' rows='10'>
+select ?energy_label ?fuel_usage ?CO2
+where{
+  &lt;http://dbpedia.org/resource/Audi_TT&gt; rdf:type ?energy_label.
+&lt;http://dbpedia.org/resource/Audi_TT&gt;  &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#CO2_gram_per_km&gt; ?CO2 .
+  &lt;http://dbpedia.org/resource/Audi_TT&gt; &lt;http://www.semanticweb.org/tim/ontologies/2015/9/untitled-ontology-9#fuel_use_per_100_km&gt; ?fuel_usage.
+Filter contains(str(?energy_label), "Label")
+ }
+
+</textarea>
+
+
+		<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 		<script src='{{ url_for("static", filename="js/jquery-1.11.0.min.js") }}' type='text/javascript'></script>
-		<script src='{{ url_for("static", filename="js/tutorial.js") }}' type='text/javascript'></script>
-
-
+		<script src='{{ url_for("static", filename="js/ass.js") }}' type='text/javascript'></script>
 	</body>
 </head>
